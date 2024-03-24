@@ -1,0 +1,197 @@
+body{
+    background-color: #11141a;
+    height: 2-10vh;
+}
+
+#side-nav{
+    background-color: black;
+    min-width: 250px;
+    max-width: 250px;
+}
+
+.content{
+    min-height: 100vh ;
+    width: 100%;
+    
+}
+
+.sidebar li.active {
+    background: white;
+    border-radius: 8px;
+}
+
+.sidebar li.active a, .sidebar li.active a{
+    color: black;
+}
+
+.sidebar li a{
+    color: white;
+}
+
+
+
+.hero{
+    min-height: 560px;
+    display: flex;
+    align-items: center;
+    background-image: url(../img/header-bg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+}
+
+.active-nav {
+    text-decoration: none;
+    color: white;
+}
+
+
+
+    
+
+
+.h1{
+   color: white;
+    position: relative;
+    margin-top: 200px;
+    margin-left: 20px;
+}
+
+.holla{
+    position: relative;
+    color: white;
+    margin-left: 20px;
+}
+
+.h-nav {
+    font-size: 20px;
+}
+
+
+.food-nav {
+    height: 4vh;
+}
+
+
+.nav-go {
+    background: #11141a;
+}
+
+.menubar li.actives {
+    background: black;
+    border-radius: 8px;
+}
+
+/* nav menu */
+.ul-navmenu{
+    display: flex;
+    background: #1f242d;
+    box-shadow: 0 0 0 5px #191b21 ;
+    
+    
+    
+}
+
+
+
+.ul-navmenu a{
+    list-style: none;
+    width: 170px;
+    
+   
+   
+}
+
+
+
+.ul-navmenu  a{
+    display: block;
+    padding: 20px;
+    text-align: center;
+    transition: 0.5s;
+    text-decoration: none;
+    color: white;
+    
+}
+
+.ul-navmenu a.actives{
+    background: white;
+}
+.ul-navmenu a.actives {
+    color: black;
+    
+}
+
+.side-menu{
+    height: 100vh;
+    
+}
+
+.grid{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    margin: 50px;
+    grid-gap: 100px;
+
+}
+
+.konten{
+    text-align: center;
+
+}
+ 
+img{
+    justify-content: center;
+    margin-left: 35px;
+}
+
+.grid > article{
+    width: 270px;
+    height: 340px;
+    
+    border: 1px solid white;
+}
+
+.ul-navmenua{
+    display: flex;
+    background: #1f242d;
+    box-shadow: 0 0 0 5px #191b21 ;
+    
+    
+    
+}
+
+
+
+.ul-navmenua a{
+    list-style: none;
+    width: 170px;
+    
+   
+   
+}
+
+
+
+.ul-navmenua  a{
+    display: block;
+    padding: 20px;
+    text-align: center;
+    transition: 0.5s;
+    text-decoration: none;
+    color: white;
+    
+}
+
+.ul-navmenua a.actives{
+    background: white;
+}
+.ul-navmenua a.actives {
+    color: black;
+    
+}
+
+
+
+
