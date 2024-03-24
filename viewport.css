@@ -1,0 +1,53 @@
+/* laptop */
+@media(max-width:1366px){
+    html{
+        font-size: 75%;
+    }
+}
+
+/* tablet */
+@media (max-width: 768px) {
+    html{
+        font-size: 62.5%;
+    
+    }
+   #side-nav{
+    max-width: 100px;
+    max-height:625px;
+
+    
+}
+
+.hero{
+    max-height: 625px;
+}
+}
+
+nav{
+    min-height: 625px;
+}
+
+
+
+/* media phone */
+@media (max-width: 450px){
+    html{
+        font-size: 55%;
+        min-height: 1vh;
+    }
+    #side-nav{
+        min-width: 120px;
+        
+    }
+
+    .hero{
+        min-height: 500px;
+    }
+    
+     
+
+    
+    
+   
+}
+
