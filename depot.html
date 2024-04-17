@@ -1,0 +1,567 @@
+<!DOCTYPE html >
+<html lang="en" >
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bootstrap demo</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+
+    <!-- swipper link -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+
+    <!--css link -->
+    <link rel="stylesheet" href="css/menu-css.css" />
+    <link rel="stylesheet" href="css/depot-cheko.css" />
+    
+    
+    
+    <!-- alipine link -->
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+  </head>
+
+  <body >
+    <!-- navbar star -->
+    <header>
+      <a href="#" class="logo"
+      ><i class="fas fa-home"></i>che<span class="span">ko</span></a
+    >
+      <!-- opsition nav -->
+      <nav class="navbar" >
+        <a href="#breakfast" class="active">breakfast food</a> 
+        <a href="#snack">Snack/pasta</a>
+        <a href="#coffee">coffee</a>
+        <a href="#non">non coffee</a>
+        <div class="marker"></div>
+        </nav>
+
+      <!-- shopping cart -->
+      <nav class="navbars">
+        <div
+          class="shopping-cart"
+          x-data
+          style="max-height: 90vh; min-height: 90vh; width: 50%"
+        >
+          <h4
+            x-show="$store.cart.items.length"
+            style="text-align: center; font-weight: bolder; font-size: 2.9rem"
+          >
+            Your cart
+          </h4>
+             <template x-for="(item, index) in $store.cart.items" x-key="index">
+            <div class="cart-item" >
+              <img :src="`depot-img/${item.img}`" :alt="item.Name" />
+              <div class="item-detail">
+                <h3 x-text="item.Name" style="color: greenyellow"></h3>
+
+                <div class="item-price">
+                  <span x-text="rupiah(item.price)"></span> &times;
+                  <button id="remove" @click="$store.cart.remove(item.id)">
+                    &minus;
+                  </button>
+                  <span x-text="item.quantity"></span>
+                  <button id="add" @click="$store.cart.add(item)">&plus;</button
+                  >&equals;
+                  <span x-text="rupiah(item.total)" ></span>
+                </div>
+              </div>
+              <i
+                class="fas fa-trash-alt"
+                id="remove-items"
+                @click="$store.cart.remove(item.id)"
+              ></i>
+            </div>
+          </template>
+          <h4
+            x-show="!$store.cart.items.length"
+            style="text-align: center; font-weight: bolder; font-size: 2.9rem"
+          >
+            Cart Is Empty
+          </h4>
+          <h4 x-show="$store.cart.items.length" style="margin: -0.5rem 0; padding-block-end: 7rem;"  >
+            Total : <span x-text="rupiah($store.cart.total)"></span>
+          </h4>
+          <i class="fas fa-times" id="close-cart"></i>
+        </div>
+      </nav>
+
+      <!-- icons -->
+      <div class="icons" x-data>
+        <i class="fas fa-search" id="search-icon"></i>
+        <i class="fas fa-bars" id="menu-bars"></i>
+        <a class="fas fa-shopping-cart" id="shopping-cart"> </a>
+        <span
+          class="quantity-badge"
+          x-show="$store.cart.quantity"
+          x-text="$store.cart.quantity"
+        ></span>
+      </div>
+    </header>
+
+    <!-- form search -->
+    <form action="" id="search-form">
+      <input type="search" placeholder="Search Here . . . ." id="search-box" />
+      <label for="search-box" class="fas fa-search"></label>
+      <i class="fas fa-times" id="close"></i>
+    </form>
+
+    <!-- navbar end -->
+
+    <!-- section start-->
+
+    <!-- slides  -->
+
+    <section class="slides-menu" x-data="products" style="margin-top: 13rem;">
+      <div class="home" id="home" >
+        <div class="swiper mySwiper" id="home-slider" >
+          <div class="swiper-wrapper" id="wrapper" >
+            <template x-for="(item, index) in items2 " x-key="index">
+            <div class="swiper-slide" id="slide" >
+              <div class="content" >
+                <span style=" font-weight: 600;">our special dish</span>
+                <h3 x-text="item.Name"></h3>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla
+                  officiis placeat dolores eligendi dolore soluta a qui. Modi,
+                  possimus aliquam. Neque tempora mollitia voluptate, laboriosam
+                  eos nulla. Incidunt, itaque voluptatum?
+                </p>
+                <span x-text="rupiah (item.price)" class="span-price" style="margin: 2rem 1rem; font-weight: bolder;"> </span>
+                <a href="#" class="btn" @click.prevent="$store.cart.add(item)">Order Now!</a>
+              </div>
+              <img :src="`depot-img/${item. img}`" :alt="item.Name" class="slide-img"/>
+            </div>
+          </template>
+          </div>
+          <div class="swiper-pagination" style="margin: -1rem 0;"></div>
+        </div>
+      </div>
+    </section>
+    <!-- slides end -->
+
+
+
+
+
+    <!-- breakfast section -->
+
+    <section  x-data="products"  class="dishes" id="breakfast">
+      <h3 class="sub-heading"  >our menu</h3>
+      <h3 class="heading"> any foods</h3>
+
+      <div class="box-container">
+        <template x-for="(item, index) in items " x-key="index">
+          <div class="box">
+            <a href="#" class="fas fa-heart"></a>
+            <img :src="`depot-img/${item. img}`" :alt="item.Name" />
+            <h3 x-text="item.Name"></h3>
+            <div class="stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
+            </div>
+            <span x-text="rupiah (item.price)" class="span-price"> </span>
+
+            <a href="#" class="btn" @click.prevent="$store.cart.add(item)"
+              >Add To Cart</a
+            >
+          </div>
+        </template>
+      </div>
+    </section>
+
+    <section class="dishes" id="snack" x-data="products">
+      <h3 class="sub-heading" >our menu</h3>
+      <h3 class="heading">snacks/pasta</h3>
+
+      <div class="box-container">
+        <template x-for="(item, index) in items1 " x-key="index">
+          <div class="box">
+            <a href="#" class="fas fa-heart"></a>
+            <img :src="`depot-img/${item. img}`" :alt="item.Name" />
+            <h3 x-text="item.Name"></h3>
+            <div class="stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
+            </div>
+            <span x-text="rupiah (item.price)" class="span-price"> </span>
+
+            <a href="#" class="btn" @click.prevent="$store.cart.add(item)"
+              >Add To Cart</a
+            >
+          </div>
+        </template>
+      </div>
+    </section>
+
+
+    <section class="dishes" id="coffee" x-data="products">
+      <h3 class="sub-heading" >our menu</h3>
+      <h3 class="heading">coffee</h3>
+
+      <div class="box-container">
+        <template x-for="(item, index) in items3 " x-key="index">
+          <div class="box">
+            <a href="#" class="fas fa-heart"></a>
+            <img :src="`depot-img/${item. img}`" :alt="item.Name" />
+            <h3 x-text="item.Name"></h3>
+            <div class="stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
+            </div>
+            <span x-text="rupiah (item.price)" class="span-price"> </span>
+
+            <a href="#" class="btn" @click.prevent="$store.cart.add(item)"
+              >Add To Cart</a
+            >
+          </div>
+        </template>
+      </div>
+    </section>
+
+
+    <section class="dishes" id="non" x-data="products">
+      <h3 class="sub-heading" >our menu</h3>
+      <h3 class="heading"> non coffee</h3>
+
+      <div class="box-container">
+        <template x-for="(item, index) in items4 " x-key="index">
+          <div class="box">
+            <a href="#" class="fas fa-heart"></a>
+            <img :src="`depot-img/${item. img}`" :alt="item.Name" />
+            <h3 x-text="item.Name"></h3>
+            <div class="stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
+            </div>
+            <span x-text="rupiah (item.price)" class="span-price"> </span>
+
+            <a href="#" class="btn" @click.prevent="$store.cart.add(item)"
+              >Add To Cart</a
+            >
+          </div>
+        </template>
+      </div>
+    </section>
+
+    <!-- section end -->
+
+
+    <!-- footer -->
+    <footer class="footer">
+      <div class="containes">
+        <div class="rowss">
+          <div class="footer-col">
+            <h4>company</h4>
+            <ul>
+              <li><a href="#">home</a></li>
+              <li><a href="#">about us</a></li>
+              <li><a href="#">get help</a></li>
+              <li><a href="#">our location</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>our menu</h4>
+            <ul>
+              <li><a href="#">any food</a></li>
+              <li><a href="#">snacks/pasta</a></li>
+              <li><a href="#">coffee</a></li>
+              <li><a href="#">non coffee</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>contact us</h4>
+            <ul>
+              <li><a href="#" class="fas fa-phone" style="font-size: 2rem;"> &nbsp; +64 812 5589 8840</a></li>
+              <li><a href="#" class="fas fa-envelope" style="font-size: 1.4rem;"> &nbsp; depotcheko@gmail.com</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>follow us</h4>
+            <ul>
+              <li><a href="#" class="fab fa-facebook"> &nbsp; depotcheko</a></li>
+              <li><a href="#" class="fab fa-twitter">  &nbsp; depot cheko</a></li>
+              <li><a href="#" class="fab fa-instagram">  &nbsp; depot cheko</a></li>
+              <li><a href="#" class="fab fa-linkedin-in">  &nbsp;  depot cheko</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- footer end -->
+
+     <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap05.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- swiper js -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
+<script>
+let navbar = document.querySelector(".navbar");
+      let menu = document.querySelector("#menu-bars");
+
+      document.querySelector("#menu-bars").onclick = () => {
+        navbar.classList.toggle("active");
+        menu.classList.toggle("fa-times");
+        menus.classList.remove("fa-times");
+        menues.classList.remove("fa-times");
+        shoppingcart.classList.remove("active");
+        searchform.classList.remove("active");
+      };
+
+      window.onscroll = () => {
+        navbar.classList.remove("active");
+        shoppingcart.classList.remove("active");
+        searchform.classList.remove("active");
+      };
+
+      //  shopping cart
+      let shoppingcart = document.querySelector(".navbars .shopping-cart");
+      let menus = document.querySelector("#shopping-cart");
+
+      document.querySelector("#shopping-cart").onclick = () => {
+        shoppingcart.classList.toggle("active");
+        menus.classList.toggle("fa-times");
+        menu.classList.remove("fa-times");
+        menues.classList.remove("fa-times");
+        navbar.classList.remove("active");
+        searchform.classList.remove("active");
+      };
+      document.querySelector("#close-cart").onclick = () => {
+        shoppingcart.classList.remove("active");
+        menus.classList.remove("fa-times");
+      };
+
+      // search icon
+      let searchform = document.querySelector("#search-form");
+      let menues = document.querySelector("#search-icon");
+
+      document.querySelector("#search-icon").onclick = () => {
+        searchform.classList.toggle("active");
+        menues.classList.toggle("fa-times");
+        menus.classList.remove("fa-times");
+        menu.classList.remove("fa-times");
+        navbar.classList.remove("active");
+        shoppingcart.classList.remove("active");
+      };
+      document.querySelector("#close").onclick = () => {
+        searchform.classList.remove("active");
+        menues.classList.remove("fa-times");
+      };
+
+      // active link
+      let section = document.querySelectorAll("section");
+      let navlinks = document.querySelectorAll("header .navbar a");
+
+      window.onscroll = () => {
+        menu.classList.remove("fa-times");
+        navbar.classList.remove("active");
+
+        section.forEach((sec) => {
+          let top = window.scrollY ;
+          let height = sec.offsetHeight ;
+          let offset = sec.offsetTop -150;
+          let id = sec.getAttribute("id");
+
+          if (top >= offset && top < offset + height) {
+            navlinks.forEach((links) => {
+              links.classList.remove("active");
+              document
+                .querySelector("header .navbar a[href*=" + id + "]")
+                .classList.add("active");
+            });
+          }
+        });
+      };
+
+      // autospy
+      var swiper = new Swiper(".mySwiper", {
+
+      spaceBetween: 30,
+      centeredSlides: true,
+      autoplay: {
+        delay: 2200,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+        loop: true,
+      },
+    });
+      // alpine scrip cart js
+      document.addEventListener("alpine:init", () => {
+        Alpine.data("products", () => ({
+          items: [
+            { id: 1, Name: "nasi goreng", img: "aa2.jpg", price: 23000 },
+            { id: 2, Name: "chicken katsu teriyaki", img: "aa2.jpg", price: 21000 },
+            { id: 3, Name: "nasi kuning", img: "aa2.jpg", price: 22000 },
+            { id: 4, Name: "indomie kuah kari ayam", img: "aa2.jpg", price: 21000 },
+            { id: 5, Name: "indomie goreng", img: "aa2.jpg", price:20000 },
+            { id: 6, Name: "fried chicken", img: "aa2.jpg", price: 21000 },
+            { id: 7, Name: "mie goreng", img: "aa2.jpg", price: 13000 },
+            { id: 8, Name: "nila goreng", img: "aa2.jpg", price: 25000 },
+            { id: 9, Name: "beef teriyaki", img: "aa2.jpg", price: 25000 },
+            { id: 10, Name: "beef katsu teriyaki", img: "aa2.jpg", price: 25000 },
+            { id: 11, Name: "bubur ayam", img: "aa2.jpg", price: 18000 },
+            { id: 12, Name: "bubur manado", img: "aa2.jpg", price: 20000 },
+          ],
+
+          items1: [
+            { id: 13, Name: " spagetti", img: "aa2.jpg", price: 20000 },
+            { id: 14, Name: "risol ayo", img: "aa2.jpg", price: 15000 },
+            { id: 15, Name: "chicken wings", img: "aa2.jpg", price: 17000 },
+            { id: 16, Name: "tahu mercon", img: "aa2.jpg", price: 17000 },
+            { id: 17, Name: "kentang goreng original", img: "aa2.jpg", price: 15000 },
+            { id: 18, Name: "tela tela", img: "aa2.jpg", price: 15000 },
+            { id: 19, Name: "chees pizza", img: "aa2.jpg", price: 23000 },
+            { id: 20, Name: "ubi goreng", img: "aa2.jpg", price: 15000 },
+            { id: 21, Name: "brownis", img: "aa2.jpg", price: 17000 },
+            { id: 22, Name: "nachos", img: "aa2.jpg", price: 17000 },
+            { id: 23, Name: "pencake", img: "aa2.jpg", price: 24000 },
+            { id: 24, Name: "pisang goreng ", img: "aa2.jpg", price: 16000 },
+          ],
+
+          items3: [
+            { id: 25, Name: "cappucino", img: "1.jpg", price: 25000 },
+            { id: 26, Name: "latte", img: "1.jpg", price: 25000 },
+            { id: 27, Name: "americano", img: "1.jpg", price: 25000 },
+            { id: 28, Name: "esppresso", img: "1.jpg", price: 20000 },
+            { id: 29, Name: "kopi tubruk", img: "1.jpg", price: 27000 },
+            { id: 30, Name: "caramel latte", img: "1.jpg", price: 23000 },
+            { id: 31, Name: "abocado coffee", img: "1.jpg", price: 21000 },
+            { id: 32, Name: "vietnamese coffee", img: "1.jpg", price: 19000 },
+            { id: 33, Name: "pocollo latte", img: "1.jpg", price: 20000 },
+            { id: 34, Name: "kopi susu", img: "1.jpg", price: 18000 },
+            { id: 35, Name: "cappucino cream brulee", img: "1.jpg", price: 18000 },
+            { id: 36, Name: "vannila latte ", img: "1.jpg", price: 21000 },
+          ],
+
+          items4: [
+            { id: 37, Name: "chocho cheese", img: "1.jpg", price: 25000 },
+            { id: 38, Name: "banana choco", img: "1.jpg", price: 20000 },
+            { id: 39, Name: "lyche yakult", img: "1.jpg", price: 21000 },
+            { id: 40, Name: "taro", img: "1.jpg", price: 26000 },
+            { id: 41, Name: "red velvet", img: "1.jpg", price: 27000 },
+            { id: 42, Name: "chocolate", img: "1.jpg", price: 23000 },
+            { id: 43, Name: "matcha", img: "1.jpg", price: 21000 },
+            { id: 44, Name: "teh tarik", img: "1.jpg", price: 20000 },
+            { id: 45, Name: "thai tea", img: "1.jpg", price: 20000 },
+            { id: 46, Name: "lyche tea", img: "1.jpg", price: 21000 },
+            { id: 47, Name: "milk shake", img: "1.jpg", price: 23000 },
+            { id: 48, Name: "mango yakult", img: "1.jpg", price: 21000 },
+          ],
+          items2: [
+            { id: 11, Name: "bubur ayam", img: "bubur.png", price: 18000 },
+            { id: 2, Name: "chicken katsu teriyaki", img: "chickens.jpg", price: 21000 },
+            { id: 13, Name: "beef teriyaki", img: "beef.jpg", price: 20000 },
+            { id: 9, Name: "spagetti", img: "112.png", price: 25000 },
+          ],
+        }));
+
+        Alpine.store("cart", {
+          items: [],
+          total: 0,
+          quantity: 0,
+          add(newItem) {
+            // cek apakah ada barang yang sama di cart?
+            const cartItem = this.items.find((item) => item.id === newItem.id);
+
+            // jika belum ada
+            if (!cartItem) {
+              this.items.push({
+                ...newItem,
+                quantity: 1,
+                total: newItem.price,
+              });
+              this.quantity++;
+              this.total += newItem.price;
+            } else {
+              // jika barang sudah ada, cek apakah
+              this.items = this.items.map((item) => {
+                if (item.id !== newItem.id) {
+                  return item;
+                } else {
+                  item.quantity++;
+                  item.total = item.price * item.quantity;
+                  this.quantity++;
+                  this.total += item.price;
+                  return item;
+                }
+              });
+            }
+          },
+
+          remove(id) {
+            const cartItem = this.items.find((item) => item.id === id);
+
+            if (cartItem.quantity > 1) {
+              this.items = this.items.map((item) => {
+                if (item.id != id) {
+                  return item;
+                } else {
+                  item.quantity--;
+                  item.total = item.price * item.quantity;
+                  this.quantity--;
+                  this.total -= item.price;
+                  return item;
+                }
+              });
+            } else if (cartItem.quantity === 1) {
+              this.items = this.items.filter((item) => item.id !== id);
+              this.quantity--;
+              this.total -= cartItem.price;
+            }
+          },
+        
+
+        });
+      });
+
+      const rupiah = (number) => {
+        return new Intl.NumberFormat("id-ID", {
+          style: "currency",
+          currency: "IDR",
+          minimumFractionDigits: 0,
+        }).format(number);
+      };
+      </script>
+    <!-- my js codes -->
+
+    
+
+    <!-- feather icon script -->
+  
+  </body>
+  </html>
+
